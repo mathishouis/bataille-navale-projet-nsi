@@ -22,6 +22,7 @@ class BatailleNavale(object):
             fenetre_pseudo.changer_titre_fenetre(" Entrez le pseudonyme du joueur " + str(i) + ": ")
             fenetre_pseudo.obtenir_bouton_valider().wait_variable(fenetre_pseudo.obtenir_etat_bouton_valider())
             print("oui")
+        fenetre_pseudo.supprimer_fenetre()
         return fenetre_pseudo.obtenir_joueurs()
 
     def __placer_bateaux(self, joueurs: list):
@@ -40,7 +41,7 @@ class BatailleNavale(object):
         fenetre_grille.changer_message_info(joueurs_tour[0].obtenir_pseudonyme() + " joue contre " + joueurs_tour[1].obtenir_pseudonyme())
         fenetre_grille.changer_texte_bouton_valider("Commencer")
         fenetre_grille.obtenir_bouton_valider().pack()
-        fenetre_grille.changer_selection(3)
+        fenetre_grille.changer_selection(9)
         fenetre_grille.obtenir_bouton_valider().wait_variable(fenetre_grille.obtenir_etat_bouton_valider())
         fenetre_grille.changer_selection(0)
         self.__placer_bateaux(joueurs_tour)
@@ -71,7 +72,6 @@ class BatailleNavale(object):
                     case.changer_etat(Etat.DECOUVERTE)
                     fenetre_grille.changer_texte_bouton_valider("Continuer le tournoi")
                     fenetre_grille.obtenir_bouton_valider().wait_variable(fenetre_grille.obtenir_etat_bouton_valider())
-                    fenetre_grille.supprimer_fenetre()
                     joueur.vider_cases_jouees()
                     if (tour % 2) == 0:
                         self.__joueurs.remove(joueurs_tour[1])
@@ -81,9 +81,17 @@ class BatailleNavale(object):
                     break
 
 
-            print("gg!")
             tour += 1
-        self.__lancer_partie()
+        if len(self.__joueurs) == 1:
+            fenetre_grille.changer_message_info(self.__joueurs[0].obtenir_pseudonyme() + " remporte le tournoi!")
+            fenetre_grille.changer_texte_bouton_valider("Recommencer")
+            fenetre_grille.obtenir_bouton_valider().wait_variable(fenetre_grille.obtenir_etat_bouton_valider())
+            fenetre_grille.supprimer_fenetre()
+            self.__joueurs = self.__demander_joueurs()
+            self.__lancer_partie()
+        else:
+            fenetre_grille.supprimer_fenetre()
+            self.__lancer_partie()
 
     def demarrer(self):
         self.__f.mainloop()

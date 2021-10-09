@@ -49,6 +49,11 @@ class DemandeJoueur(object):
     def obtenir_joueurs(self) -> list:
         return self.__joueurs
 
+    def supprimer_fenetre(self):
+        self.__titre.destroy()
+        self.__entree_pseudonyme.destroy()
+        self.__bouton_valider.destroy()
+
 class AfficherGrille(object):
 
     def __init__(self, f: Tk, largeur: int, hauteur: int, selection_max: int):

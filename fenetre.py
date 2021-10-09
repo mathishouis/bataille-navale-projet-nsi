@@ -29,8 +29,7 @@ class DemandeJoueur(object):
 
         # Bouton valider
         self.__etat_bouton_valider = IntVar()
-        self.__bouton_valider_texte = StringVar()
-        self.__bouton_valider = Button(self.__f, text=self.__bouton_valider_texte, command=lambda: self.__valider_pseudonyme(self.__entree_pseudonyme))
+        self.__bouton_valider = Button(self.__f, text="Valider", command=lambda: self.__valider_pseudonyme(self.__entree_pseudonyme))
         self.__bouton_valider.place(x=20, y=50, width=210, height=20)
 
     def __valider_pseudonyme(self, entree: Entry):
@@ -84,7 +83,8 @@ class AfficherGrille(object):
 
         # Bouton valider
         self.__etat_bouton_valider = IntVar()
-        self.__bouton_valider = Button(self.__f, text="Valider", command=lambda: self.__valider_tour())
+        self.__bouton_valider_texte = StringVar()
+        self.__bouton_valider = Button(self.__f, textvariable=self.__bouton_valider_texte, command=lambda: self.__valider_tour())
 
     def __cliquer_fenetre(self, event):
         for x in range(self.__largeur_grille):

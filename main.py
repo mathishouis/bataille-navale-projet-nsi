@@ -21,7 +21,6 @@ class BatailleNavale(object):
         for i in range(9):
             fenetre_pseudo.changer_titre_fenetre(" Entrez le pseudonyme du joueur " + str(i) + ": ")
             fenetre_pseudo.obtenir_bouton_valider().wait_variable(fenetre_pseudo.obtenir_etat_bouton_valider())
-            print("oui")
         fenetre_pseudo.supprimer_fenetre()
         return fenetre_pseudo.obtenir_joueurs()
 
@@ -34,14 +33,13 @@ class BatailleNavale(object):
         self.__grille = fenetre_grille.obtenir_grille()
 
         joueurs_aleatoires = random.sample(self.__joueurs, 2)
-
         joueurs_tour = []
         joueurs_tour.append(joueurs_aleatoires[0])
         joueurs_tour.append(joueurs_aleatoires[1])
         fenetre_grille.changer_message_info(joueurs_tour[0].obtenir_pseudonyme() + " joue contre " + joueurs_tour[1].obtenir_pseudonyme())
         fenetre_grille.changer_texte_bouton_valider("Commencer")
         fenetre_grille.obtenir_bouton_valider().pack()
-        fenetre_grille.changer_selection(9)
+        fenetre_grille.changer_selection(3)
         fenetre_grille.obtenir_bouton_valider().wait_variable(fenetre_grille.obtenir_etat_bouton_valider())
         fenetre_grille.changer_selection(0)
         self.__placer_bateaux(joueurs_tour)

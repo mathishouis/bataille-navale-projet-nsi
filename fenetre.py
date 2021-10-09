@@ -144,6 +144,7 @@ class AfficherGrille(object):
         self.__info.destroy()
         self.__grille.supprimer_grille()
         self.__bouton_valider.destroy()
+        self.__f.unbind("<1>")
 
     def changer_selection(self, selection: int):
         self.__selection = selection

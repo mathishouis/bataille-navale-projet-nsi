@@ -140,6 +140,9 @@ class AfficherGrille(object):
         self.__grille.supprimer_grille()
         self.__bouton_valider.destroy()
 
+    def changer_selection(self, selection: int):
+        self.__selection = selection
+
 
 
 

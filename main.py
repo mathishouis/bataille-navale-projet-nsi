@@ -19,7 +19,7 @@ class BatailleNavale(object):
     def __demander_joueurs(self) -> Joueur:
         fenetre_pseudo = DemandeJoueur(self.__f)
         for i in range(9):
-            fenetre_pseudo.changer_titre_fenetre("Entrez le pseudonyme du joueur " + str(i) + ":")
+            fenetre_pseudo.changer_titre_fenetre(" Entrez le pseudonyme du joueur " + str(i) + ": ")
             fenetre_pseudo.obtenir_bouton_valider().wait_variable(fenetre_pseudo.obtenir_etat_bouton_valider())
             print("oui")
         return fenetre_pseudo.obtenir_joueurs()
@@ -37,6 +37,12 @@ class BatailleNavale(object):
         joueurs_tour = []
         joueurs_tour.append(joueurs_aleatoires[0])
         joueurs_tour.append(joueurs_aleatoires[1])
+        fenetre_grille.changer_message_info(joueurs_tour[0].obtenir_pseudonyme() + " joue contre " + joueurs_tour[1].obtenir_pseudonyme())
+        fenetre_grille.changer_texte_bouton_valider("Commencer")
+        fenetre_grille.obtenir_bouton_valider().pack()
+        fenetre_grille.changer_selection(3)
+        fenetre_grille.obtenir_bouton_valider().wait_variable(fenetre_grille.obtenir_etat_bouton_valider())
+        fenetre_grille.changer_selection(0)
         self.__placer_bateaux(joueurs_tour)
         tour = 0
         jouer = True
@@ -61,7 +67,7 @@ class BatailleNavale(object):
                 fenetre_grille.obtenir_grille().obtenir_case(case.obtenir_x(), case.obtenir_y()).changer_etat(Etat.INDISPONIBLE)
                 joueur.ajouter_case_jouee(case)
                 if joueur.obtenir_case_bateau() == case:
-                    print("Victoire de " + joueur.obtenir_pseudonyme())
+                    fenetre_grille.changer_message_info("Victoire de " + joueur.obtenir_pseudonyme())
                     case.changer_etat(Etat.DECOUVERTE)
                     fenetre_grille.changer_texte_bouton_valider("Continuer le tournoi")
                     fenetre_grille.obtenir_bouton_valider().wait_variable(fenetre_grille.obtenir_etat_bouton_valider())

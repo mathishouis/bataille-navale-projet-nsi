@@ -33,23 +33,30 @@ class DemandeJoueur(object):
         self.__bouton_valider.place(x=20, y=50, width=210, height=20)
 
     def __valider_pseudonyme(self, entree: Entry):
+        # On indique que le bouton valider a été cliqué
         self.__etat_bouton_valider.set(1)
         self.__joueurs.append(Joueur(entree.get()))
+        # On vide la saisie de texte
         entree.delete(0, "end")
 
     def changer_titre_fenetre(self, titre: str):
+        # On change le titre de la fenêtre
         self.__titre_texte.set(titre)
 
     def obtenir_bouton_valider(self) -> Button:
+        # Retourne le bouton valider
         return self.__bouton_valider
 
     def obtenir_etat_bouton_valider(self) -> IntVar:
+        # Retourne l'état du bouton valider
         return self.__etat_bouton_valider
 
     def obtenir_joueurs(self) -> list:
+        # Retourne la liste des joueurs
         return self.__joueurs
 
     def supprimer_fenetre(self):
+        # Supprime les instances de la fenêtre
         self.__titre.destroy()
         self.__entree_pseudonyme.destroy()
         self.__bouton_valider.destroy()
@@ -97,34 +104,41 @@ class AfficherGrille(object):
                 case = self.__grille.obtenir_case(x, y)
                 if case.obtenir_case() == event.widget:
                     if case.obtenir_etat_case() == Etat.DISPONIBLE:
+                        # Si la case cliquée est disponible
                         if self.__selection < self.__selection_max:
                             self.__selection += 1
                             case.changer_etat(Etat.SELECTIONNEE)
                     elif case.obtenir_etat_case() == Etat.SELECTIONNEE:
+                        # Si la case cliquée est déjà sélectionnée
                         self.__selection -= 1
                         case.changer_etat(Etat.DISPONIBLE)
         if self.__selection == self.__selection_max:
-            self.__bouton_valider.pack()
+            self.__bouton_valider.pack() # Affiche le bouton valider
         else:
-            self.__bouton_valider.pack_forget()
+            self.__bouton_valider.pack_forget() # Cache le bouton valider
 
     def __valider_tour(self):
         self.__etat_bouton_valider.set(1)
 
     def obtenir_grille(self) -> Grille:
+        # Retourne la grille
         return self.__grille
 
     def obtenir_bouton_valider(self) -> Button:
+        # Retourne le bouton valider
         return self.__bouton_valider
 
     def obtenir_etat_bouton_valider(self) -> IntVar:
+        # Retourne l'état du bouton valider
         return self.__etat_bouton_valider
 
     def vider_grille(self):
+        # Vide la grille
         self.__grille.vider_grille()
         self.__selection = 0
 
     def obtenir_cases_selectionnees(self) -> list:
+        # Retourne la liste des cases sélectionnées
         cases = []
         for x in range(self.__largeur_grille):
             for y in range(self.__hauteur_grille):

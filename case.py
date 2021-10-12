@@ -19,18 +19,6 @@ class Case(object):
         self.__case = Button(f, command=lambda x=x, y=y: self.__clique_case(x, y))
         self.__case.place(x=x * 50, y=y * 50, width=50, height=50)
 
-    def __clique_case(self, x: int, y: int):
-        """
-        print(x, y)
-        if self.__etat == DISPONIBLE:
-            self.changer_etat(SELECTIONNEE)
-        elif self.__etat == SELECTIONNEE:
-            self.changer_etat(DISPONIBLE)
-        else:
-            return
-        """
-
-
     def changer_etat(self, etat: int):
         self.__etat = etat
 

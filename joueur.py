@@ -12,11 +12,11 @@ class Joueur(object):
     def retirer_case_jouee(self, case: Case):
         self.__cases_jouees.remove(case)
 
-    def obtenir_cases_jouees(self) -> list:
-        return self.__cases_jouees
-
     def placer_bateau(self, case: Case):
         self.__bateau = case
+
+    def vider_cases_jouees(self):
+        self.__cases_jouees = []
 
     def obtenir_case_bateau(self) -> Case:
         return self.__bateau
@@ -24,5 +24,5 @@ class Joueur(object):
     def obtenir_pseudonyme(self) -> str:
         return self.__pseudonyme
 
-    def vider_cases_jouees(self):
-        self.__cases_jouees = []
+    def obtenir_cases_jouees(self) -> list:
+        return self.__cases_jouees

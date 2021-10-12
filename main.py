@@ -10,7 +10,7 @@ class BatailleNavale(object):
 
     def __init__(self):
         self.__f = Tk()
-        self.__f.title('Bataille Navale 5x5')
+        self.__f.title("Bataille Navale 5x5")
         self.__f.resizable(False, False)
 
         self.__joueurs = self.__demander_joueurs()

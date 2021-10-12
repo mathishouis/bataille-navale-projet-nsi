@@ -35,7 +35,7 @@ class DemandeJoueur(object):
     def __valider_pseudonyme(self, entree: Entry):
         self.__etat_bouton_valider.set(1)
         self.__joueurs.append(Joueur(entree.get()))
-        entree.delete(0, 'end')
+        entree.delete(0, "end")
 
     def changer_titre_fenetre(self, titre: str):
         self.__titre_texte.set(titre)

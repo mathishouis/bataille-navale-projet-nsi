@@ -16,7 +16,7 @@ class Case(object):
         self.__y = y
         self.__etat = Etat.DISPONIBLE
 
-        self.__case = Button(f, command=lambda x=x, y=y: self.__clique_case(x, y))
+        self.__case = Button(f)
         self.__case.place(x=x * 50, y=y * 50, width=50, height=50)
 
     def changer_etat(self, etat: int):

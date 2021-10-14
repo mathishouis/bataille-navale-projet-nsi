@@ -33,26 +33,23 @@ class BatailleNavale(object):
         self.__grille = fenetre_grille.obtenir_grille()
 
         joueurs_aleatoires = random.sample(self.__joueurs, 2)
-        joueurs_tour = []
-        joueurs_tour.append(joueurs_aleatoires[0])
-        joueurs_tour.append(joueurs_aleatoires[1])
-        fenetre_grille.changer_message_info(joueurs_tour[0].obtenir_pseudonyme() + " joue contre " + joueurs_tour[1].obtenir_pseudonyme())
+        fenetre_grille.changer_message_info(joueurs_aleatoires[0].obtenir_pseudonyme() + " joue contre " + joueurs_aleatoires[1].obtenir_pseudonyme())
         fenetre_grille.changer_texte_bouton_valider("Commencer")
         fenetre_grille.obtenir_bouton_valider().pack()
         fenetre_grille.changer_selection(3)
         fenetre_grille.obtenir_bouton_valider().wait_variable(fenetre_grille.obtenir_etat_bouton_valider())
         fenetre_grille.changer_selection(0)
-        self.__placer_bateaux(joueurs_tour)
+        self.__placer_bateaux(joueurs_aleatoires)
         tour = 0
         jouer = True
 
         while jouer:
             if (tour % 2) == 0:
-                joueur = joueurs_tour[0]
-                fenetre_grille.changer_message_info("Au tour de " + joueurs_tour[0].obtenir_pseudonyme())
+                joueur = joueurs_aleatoires[0]
+                fenetre_grille.changer_message_info("Au tour de " + joueurs_aleatoires[0].obtenir_pseudonyme())
             else:
-                joueur = joueurs_tour[1]
-                fenetre_grille.changer_message_info("Au tour de " + joueurs_tour[1].obtenir_pseudonyme())
+                joueur = joueurs_aleatoires[1]
+                fenetre_grille.changer_message_info("Au tour de " + joueurs_aleatoires[1].obtenir_pseudonyme())
             fenetre_grille.changer_texte_bouton_valider("Valider")
             fenetre_grille.vider_grille()
             fenetre_grille.obtenir_bouton_valider().pack_forget()
@@ -72,9 +69,9 @@ class BatailleNavale(object):
                     fenetre_grille.obtenir_bouton_valider().wait_variable(fenetre_grille.obtenir_etat_bouton_valider())
                     joueur.vider_cases_jouees()
                     if (tour % 2) == 0:
-                        self.__joueurs.remove(joueurs_tour[1])
+                        self.__joueurs.remove(joueurs_aleatoires[1])
                     else:
-                        self.__joueurs.remove(joueurs_tour[0])
+                        self.__joueurs.remove(joueurs_aleatoires[0])
                     jouer = False
                     break
 

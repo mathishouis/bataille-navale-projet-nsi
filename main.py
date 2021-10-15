@@ -46,9 +46,11 @@ class BatailleNavale(object):
         while jouer:
             if (tour % 2) == 0:
                 joueur = joueurs_aleatoires[0]
+                adversaire = joueurs_aleatoires[1]
                 fenetre_grille.changer_message_info("Au tour de " + joueurs_aleatoires[0].obtenir_pseudonyme())
             else:
                 joueur = joueurs_aleatoires[1]
+                adversaire = joueurs_aleatoires[0]
                 fenetre_grille.changer_message_info("Au tour de " + joueurs_aleatoires[1].obtenir_pseudonyme())
             fenetre_grille.changer_texte_bouton_valider("Valider")
             fenetre_grille.vider_grille()
@@ -62,16 +64,15 @@ class BatailleNavale(object):
             for case in fenetre_grille.obtenir_cases_selectionnees():
                 fenetre_grille.obtenir_grille().obtenir_case(case.obtenir_x(), case.obtenir_y()).changer_etat(Etat.INDISPONIBLE)
                 joueur.ajouter_case_jouee(case)
-                if joueur.obtenir_case_bateau() == case:
+                if adversaire.obtenir_case_bateau() == case:
                     fenetre_grille.changer_message_info("Victoire de " + joueur.obtenir_pseudonyme())
                     case.changer_etat(Etat.DECOUVERTE)
                     fenetre_grille.changer_texte_bouton_valider("Continuer le tournoi")
                     fenetre_grille.obtenir_bouton_valider().wait_variable(fenetre_grille.obtenir_etat_bouton_valider())
                     joueur.vider_cases_jouees()
-                    if (tour % 2) == 0:
-                        self.__joueurs.remove(joueurs_aleatoires[1])
-                    else:
-                        self.__joueurs.remove(joueurs_aleatoires[0])
+                    
+                    self.__joueurs.remove(adversaire)
+                    
                     jouer = False
                     break
 
